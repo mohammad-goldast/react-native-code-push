@@ -5,6 +5,7 @@
 #import <React/RCTEventDispatcher.h>
 #import <React/RCTRootView.h>
 #import <React/RCTUtils.h>
+#import <React/RCTReloadCommand.h>
 #else // back compatibility for RN version < 0.40
 #import "RCTAssert.h"
 #import "RCTBridgeModule.h"
@@ -12,6 +13,7 @@
 #import "RCTEventDispatcher.h"
 #import "RCTRootView.h"
 #import "RCTUtils.h"
+
 #endif
 
 #import "CodePush.h"
@@ -540,7 +542,7 @@ static NSString *const LatestRollbackCountKey = @"count";
             [super.bridge setValue:[CodePush bundleURL] forKey:@"bundleURL"];
         }
 
-        [super.bridge reload];
+        RCTTriggerReloadCommandListeners(@"react-native-code-push: Restart");
     });
 }
 
